@@ -1,0 +1,60 @@
+# Clojure exclusions
+
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/lib/
+/classes/
+/target/
+/out/
+/checkouts/
+.cpcache/
+.lein-plugins/
+.shadow-cljs/
+.lein-deps-sum
+.lein-failures
+.lein-repl-history
+.nrepl-port
+
+# IntelliJ exclusions
+
+*.iml
+.idea/
+.calva/
+.compiler-output/
+
+# Visual Studio Code exclusions
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Generic exclusions
+
+.*.\~undo-tree\~
+.DS_Store
+*.tar.gz
+
+# Node/JavaScript exclusions
+
+npm-debug.log*
+*.tsbuildinfo
+node_modules/
+public/domo/js/
+.serverless/
+.node_repl_history
+.npm
+
+# clj-kondo and lsp exclusions
+
+.clj-kondo/
+.lsp/

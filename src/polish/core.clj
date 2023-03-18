@@ -59,11 +59,18 @@
 
 (new-ctx '(1 2 ^:push + 2 invoke 1 ^{:arity 2} +))
 
+;add2 (x) = x + 2
 (comment
 
   (eval
-    defproc + (^{:arity 2} clojure.core/+)
 
-    1 2 + inc)
+    defproc plus2 ( 2 ^{:arity 2} +)
 
-  (evaluations 1 2 ^{:arity 2} + inc))
+
+    1 plus2
+
+    )
+
+  (evaluations 1 2 ^{:arity 2} + inc)
+
+  )

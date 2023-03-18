@@ -15,7 +15,7 @@
 (defn new-procedure [body]
   (reify
     Procedure
-    (eval-procedure [_ ctx] (reduce ctx/shift ctx body))))
+    (eval-procedure [_ ctx] (reduce ctx/shift ctx (reverse body)))))
 
 (def defproc-special-form
   (let [defproc-usage-message "defproc is expected to be of the form \"defproc <proc-name> <body>\"

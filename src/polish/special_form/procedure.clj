@@ -28,7 +28,7 @@
               _ (assert (symbol? proc-name) defproc-usage-message)
               [ctx body] (ctx/unshift ctx)
               _ (assert (list? body) defproc-usage-message)]
-          (update ctx :env assoc proc-name (new-procedure body)))))))
+          (ctx/bind-sym ctx proc-name (new-procedure body)))))))
 
 (def procedure-token-type
   (reify

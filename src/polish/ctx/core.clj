@@ -11,6 +11,7 @@
   (with-program [ctx program])
   (with-data [ctx data])
   (with-env [ctx env])
+  (bind-sym [this sym value])
   (with-special-form [this special-form])
   (with-token-type [this token-type])
   (push [ctx value])
@@ -33,14 +34,25 @@
   (with-env [this e]
     (assoc this :env e))
 
+  (bind-sym [this sym value]
+    (let [[head tail] [(first env) (rest env)]]
+      (->> value
+           (assoc head sym)
+           (conj tail)
+           (with-env this))))
+
   (with-special-form [this special-form]
-    (update this :env assoc (sf/get-symbol special-form) special-form))
+    (bind-sym this (sf/get-symbol special-form)
+              special-form))
 
   (with-token-type [this token-type]
     (update this :token-types conj token-type))
 
   (pop [this]
-    [(with-data this (rest ds)) (first ds)])
+    [(with-data this (rest ds))
+     (or (first ds)
+         (throw (ex-info "Tried to pop from an empty data stack"
+                         {:ctx this})))])
 
   (push [this value]
     (update this :ds conj value))
@@ -58,7 +70,7 @@
     (first ps))
 
   (lookup [_ sym]
-    (or (get env sym)
+    (or (some #(get % sym) env)
         (var-get (resolve sym))))
 
   (eval-1 [this]

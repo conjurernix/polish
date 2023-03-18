@@ -39,7 +39,9 @@
           (and (= arity :variadic)
                (not push?))
           (throw (ex-info "Have to explicitly provide arity for
-            functions with variadic arguments." {:fn token}))
+            functions with variadic arguments."
+                          {:fn  token
+                           :ctx ctx}))
 
           push? (ctx/push ctx token)
           :else (let [[ctx values] (ctx/pop-values ctx arity)]

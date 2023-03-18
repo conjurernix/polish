@@ -59,15 +59,15 @@
 
 (new-ctx '(1 2 ^:push + 2 invoke 1 ^{:arity 2} +))
 
-;add2 (x) = x + 2
+;plus2 (x) = x + 2
 (comment
 
   (eval
 
-    defproc plus2 ( 2 ^{:arity 2} +)
+    defproc plus2 ( 2 ^{:arity 3} +)
 
 
-    1 plus2
+    1 plus2 plus2
 
     )
 

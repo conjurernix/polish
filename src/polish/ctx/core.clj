@@ -19,6 +19,7 @@
   (shift [ctx value])
   (unshift [ctx])
   (look [ctx])
+  (lookup [ctx sym])
   (eval-1 [ctx]))
 
 (defrecord Ctx [token-types env ps ds]
@@ -56,6 +57,10 @@
   (look [_]
     (first ps))
 
+  (lookup [_ sym]
+    (or (get env sym)
+        (var-get (resolve sym))))
+
   (eval-1 [this]
     (let [[this token] (unshift this)]
       (when token
@@ -75,7 +80,3 @@
     (let [[ctx values] (pop-values ctx (dec n))
           [ctx value] (pop ctx)]
       [ctx (conj values value)])))
-
-(defn resolve-symbol [ctx sym]
-  (or (get-in ctx [:env sym])
-      (var-get (resolve sym))))

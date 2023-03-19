@@ -2,7 +2,10 @@
   (:refer-clojure :exclude [eval])
   (:require
     [polish.ctx.core :as ctx]
+    [polish.special-form.dup :refer [dup-special-form]]
     [polish.special-form.invoke :refer [invoke-special-form]]
+    [polish.special-form.pop :refer [pop-special-form]]
+    [polish.special-form.let :refer [let-special-form]]
     [polish.special-form.procedure :refer [defproc-special-form procedure-token-type]]
     [polish.token.fn :refer [fn-token-type]]
     [polish.token.special-form :refer [special-form-token-type]]
@@ -12,7 +15,10 @@
 (defn with-default-env [ctx]
   (-> ctx
       (ctx/with-special-form defproc-special-form)
-      (ctx/with-special-form invoke-special-form)))
+      (ctx/with-special-form let-special-form)
+      (ctx/with-special-form invoke-special-form)
+      (ctx/with-special-form pop-special-form)
+      (ctx/with-special-form dup-special-form)))
 
 (defn with-default-token-types [ctx]
   (-> ctx
@@ -56,6 +62,11 @@
           (iterate ctx/eval-1)
           (take-while some?))))
 
+(defn result [ctx]
+  (-> ctx
+      :ds
+      (first)))
+
 
 (new-ctx '(1 2 ^:push + 2 invoke 1 ^{:arity 2} +))
 
@@ -64,12 +75,21 @@
 
   (eval
 
-    defproc plus2 ( 2 ^{:arity 3} +)
+    defproc add [x y]
+    ( x y ^{:arity 2} +)
+
+    defproc plus2 [x]
+    ( x 2 add)
+
+    defproc plus2alternative []
+    (2 add)
 
 
-    1 plus2 plus2
-
-    )
+    1 plus2 plus2alternative
+    dup
+    let [a b]
+    ( a b add )
+    plus2)
 
   (evaluations 1 2 ^{:arity 2} + inc)
 

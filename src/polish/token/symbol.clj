@@ -9,4 +9,5 @@
     (satisfied? [_ token] (symbol? token))
     (handle [_ token ctx]
       (let [token-meta (meta token)]
-        (ctx/shift ctx (with-meta (ctx/lookup ctx token) token-meta))))))
+        (ctx/shift ctx (cond-> (ctx/lookup ctx token)
+                         token-meta (with-meta token-meta)))))))

@@ -14,10 +14,12 @@
   (bind-sym [this sym value])
   (with-special-form [this special-form])
   (with-token-type [this token-type])
+  (new-scope [ctx])
+  (remove-scope [ctx])
   (push [ctx value])
   (pop [ctx])
   (peek [ctx])
-  (shift [ctx value])
+  (shift [ctx value-or-values])
   (unshift [ctx])
   (look [ctx])
   (lookup [ctx sym])
@@ -47,6 +49,12 @@
 
   (with-token-type [this token-type]
     (update this :token-types conj token-type))
+
+  (new-scope [this]
+    (update this :env conj {}))
+
+  (remove-scope [this]
+    (update this :env rest))
 
   (pop [this]
     [(with-data this (rest ds))
@@ -92,3 +100,17 @@
     (let [[ctx values] (pop-values ctx (dec n))
           [ctx value] (pop ctx)]
       [ctx (conj values value)])))
+
+(defn eval-with-scope [ctx bindings body]
+  (let [bindings-count (count bindings)
+        body-count (count body)
+        body (reverse body)
+        ctx (new-scope ctx)
+        [ctx values] (pop-values ctx bindings-count)
+        ctx (->> values
+                 (zipmap bindings)
+                 (reduce (fn [ctx [sym value]]
+                           (bind-sym ctx sym value)) ctx))
+        ctx (reduce shift ctx body)
+        ctx (reduce (fn [ctx _] (eval-1 ctx)) ctx (range body-count))]
+    (remove-scope ctx)))

@@ -1,7 +1,7 @@
 (ns polish.special-form.pop
   (:require
-    [polish.ctx.core :as ctx]
-    [polish.special-form.core :as sf]))
+    [polish.ctx :as ctx]
+    [polish.special-form :as sf]))
 
 (def pop-special-form
   (reify

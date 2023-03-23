@@ -1,9 +1,9 @@
-(ns polish.ctx.core
+(ns polish.ctx
   (:refer-clojure :exclude [eval peek pop])
   (:require
     [medley.core :as m]
-    [polish.special-form.core :as sf]
-    [polish.token.core :as t]))
+    [polish.special-form :as sf]
+    [polish.token :as t]))
 
 (def ^:dynamic *ctx*)
 

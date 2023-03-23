@@ -1,6 +1,6 @@
 (ns polish.token.fn
-  (:require [polish.ctx.core :as ctx]
-            [polish.token.core :as t]))
+  (:require [polish.ctx :as ctx]
+            [polish.token :as t]))
 
 (defn fn-arity
   "Returns the maximum arity of:

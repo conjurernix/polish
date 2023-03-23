@@ -1,7 +1,7 @@
 (ns polish.token.var
   (:require
-    [polish.ctx.core :as ctx]
-    [polish.token.core :as t]))
+    [polish.ctx :as ctx]
+    [polish.token :as t]))
 
 (def var-token-type
   (reify

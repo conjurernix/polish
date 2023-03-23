@@ -1,4 +1,4 @@
-(ns polish.special-form.core)
+(ns polish.special-form)
 
 (defprotocol SpecialForm
   (get-symbol [_])

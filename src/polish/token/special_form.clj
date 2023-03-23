@@ -1,7 +1,7 @@
 (ns polish.token.special-form
   (:require
-    [polish.special-form.core :as sf]
-    [polish.token.core :as t]))
+    [polish.special-form :as sf]
+    [polish.token :as t]))
 
 (def special-form-token-type
   (reify

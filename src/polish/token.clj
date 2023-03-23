@@ -1,4 +1,4 @@
-(ns polish.token.core)
+(ns polish.token)
 
 (defprotocol TokenType
   (satisfied? [this token])

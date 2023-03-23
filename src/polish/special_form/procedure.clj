@@ -1,8 +1,8 @@
 (ns polish.special-form.procedure
   (:require
-    [polish.ctx.core :as ctx]
-    [polish.special-form.core :as sf]
-    [polish.token.core :as t]))
+    [polish.ctx :as ctx]
+    [polish.special-form :as sf]
+    [polish.token :as t]))
 
 
 ; Procedures

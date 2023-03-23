@@ -1,6 +1,6 @@
 (ns polish.special-form.invoke
-  (:require [polish.ctx.core :as ctx]
-            [polish.special-form.core :as sf]))
+  (:require [polish.ctx :as ctx]
+            [polish.special-form :as sf]))
 
 (def invoke-special-form
   (reify

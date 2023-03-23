@@ -1,7 +1,7 @@
 (ns polish.core
   (:refer-clojure :exclude [eval])
   (:require
-    [polish.ctx.core :as ctx]
+    [polish.ctx :as ctx]
     [polish.special-form.dup :refer [dup-special-form]]
     [polish.special-form.invoke :refer [invoke-special-form]]
     [polish.special-form.pop :refer [pop-special-form]]

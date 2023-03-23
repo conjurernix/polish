@@ -1,7 +1,7 @@
 (ns polish.token.symbol
   (:require
-    [polish.ctx.core :as ctx]
-    [polish.token.core :as t]))
+    [polish.ctx :as ctx]
+    [polish.token :as t]))
 
 (def symbol-token-type
   (reify

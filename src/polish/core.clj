@@ -2,10 +2,7 @@
   (:refer-clojure :exclude [eval])
   (:require
     [polish.ctx :as ctx]
-    [polish.special-form.dup :refer [dup-special-form]]
-    [polish.special-form.swap :refer [swap-special-form]]
     [polish.special-form.invoke :refer [invoke-special-form]]
-    [polish.special-form.drop :refer [drop-special-form]]
     [polish.special-form.let :refer [let-special-form]]
     [polish.special-form.procedure :refer [defproc-special-form procedure-token-type]]
     [polish.token.fn :refer [fn-token-type]]
@@ -18,10 +15,7 @@
   (-> ctx
       (ctx/with-special-form defproc-special-form)
       (ctx/with-special-form let-special-form)
-      (ctx/with-special-form invoke-special-form)
-      (ctx/with-special-form drop-special-form)
-      (ctx/with-special-form dup-special-form)
-      (ctx/with-special-form swap-special-form)))
+      (ctx/with-special-form invoke-special-form)))
 
 (defn with-default-token-types [ctx]
   (-> ctx
@@ -78,13 +72,15 @@
 ;plus2 (x) = x + 2
 (comment
 
+  ; (reduce + [1 2 3])
   (eval
 
-    defproc plus2 [x]
-    ( x 2 add)
+    1 2 swap
 
-    1 plus2 plus2 dup add )
+    )
 
-  (evaluations 1 2 ^{:arity 2} + inc)
+  (evaluations
+    1 2 add dup add
+    )
 
   )

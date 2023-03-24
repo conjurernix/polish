@@ -113,4 +113,4 @@
                            (bind-sym ctx sym value)) ctx))
         ctx (reduce shift ctx body)
         ctx (reduce (fn [ctx _] (eval-1 ctx)) ctx (range body-count))]
-    (remove-scope ctx)))
+    (remove-scope (eval-1 ctx))))

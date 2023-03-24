@@ -16,6 +16,7 @@
   (reify
     Procedure
     (eval-procedure [_ ctx]
+      #p body
       (ctx/eval-with-scope ctx bindings body))))
 
 (def defproc-special-form

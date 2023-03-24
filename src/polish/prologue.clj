@@ -13,6 +13,18 @@
      ( x y ^{:arity 2} / )
 
      defproc mul [x y]
-     ( x y ^{:arity 2} * ))
+     ( x y ^{:arity 2} * )
+
+     defproc dup [x]
+     ( x x )
+
+     defproc swap [x y]
+     ( y x )
+
+     defproc drop [x]
+     ()
+
+
+             )
 
   )

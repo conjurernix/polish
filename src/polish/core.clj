@@ -1,6 +1,7 @@
 (ns polish.core
   (:refer-clojure :exclude [eval])
   (:require
+    [medley.core :as m]
     [polish.ctx :as ctx]
     [polish.special-form.invoke :refer [invoke-special-form]]
     [polish.special-form.let :refer [let-special-form]]
@@ -9,7 +10,8 @@
     [polish.token.special-form :refer [special-form-token-type]]
     [polish.token.symbol :refer [symbol-token-type]]
     [polish.token.var :refer [var-token-type]]
-    [polish.prologue :refer [prologue]]))
+    [polish.prologue :refer [prologue]]
+    [polish.utils :as u]))
 
 (defn with-default-env [ctx]
   (-> ctx
@@ -59,7 +61,7 @@
                                  program#)))]
      (->> ctx#
           (iterate ctx/eval-1)
-          (take-while some?))))
+          (u/take-until-distinct))))
 
 (defn result [ctx]
   (-> ctx
@@ -75,12 +77,12 @@
   ; (reduce + [1 2 3])
   (eval
 
-    1 2 swap
+    1 2 swap sub dup drop
 
     )
 
   (evaluations
-    1 2 add dup add
+    1 2 swap sub dup drop
     )
 
   )

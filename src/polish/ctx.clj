@@ -83,11 +83,12 @@
 
   (eval-1 [this]
     (let [[this token] (unshift this)]
-      (when token
+      (if token
         (or (some-> (->> token-types
                          (m/find-first #(t/satisfied? % token)))
                     (t/handle token this))
-            (push this token))))))
+            (push this token))
+        this))))
 
 (defn eval [ctx]
   (if (look ctx)

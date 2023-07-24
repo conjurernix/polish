@@ -79,7 +79,9 @@
 
   (lookup [_ sym]
     (or (some #(get % sym) env)
-        (var-get (resolve sym))))
+        (var-get (or (resolve sym)
+                     (throw (ex-info (str "Could not resolve symbol: " sym)
+                                     {:sym sym}))))))
 
   (eval-1 [this]
     (let [[this token] (unshift this)]

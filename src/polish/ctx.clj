@@ -78,10 +78,7 @@
     (first ps))
 
   (lookup [_ sym]
-    (or (some #(get % sym) env)
-        (var-get (or (resolve sym)
-                     (throw (ex-info (str "Could not resolve symbol: " sym)
-                                     {:sym sym}))))))
+    (some #(get % sym) env))
 
   (eval-1 [this]
     (let [[this token] (unshift this)]

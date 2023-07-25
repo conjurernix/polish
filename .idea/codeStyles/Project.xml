@@ -1,0 +1,11 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <ClojureCodeStyleSettings>
+      <option name="indentCustomisations">
+        <map>
+          <entry key="clojure.core/cond-&gt;" value="1" />
+        </map>
+      </option>
+    </ClojureCodeStyleSettings>
+  </code_scheme>
+</component>
